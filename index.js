@@ -3,19 +3,34 @@ const ics = require('ics')
 var moment = require('moment');
 require('moment-recur');
 
+
+let people = ['jason', 'hess', 'adam', 'matt']
+let eventArray = [];
+
+let changeOwnership = moment().recur({
+    start: moment(),
+    end: moment().add(1 , 'y')
+}).every(7, "days");
+
+// Outputs: ["01/01/2014", "01/03/2014", "01/05/2014", "01/07/2014"]
+let changeOwnerArray = changeOwnership.all("L");
+
+let count = 0
+
+
 const handleEventCreate = (eventDate) =>{
   let personOnDuty = people[count]
   if (count === 3) {
     count = 0
   }
 
-  eventDate = moment(eventDate)
+  eventDateM = moment(eventDate)
 
   let event = {
     title: personOnDuty,
     description: 'Nightly thing I do',
-    start: [eventDate.format('YYYY'), eventDate.format('MM'), eventDate.format('D')],
-    end: [eventDate.add(1, 'day').format('YYYY'), eventDate.add(1, 'day').format('MM'), eventDate.add(1, 'day').format('D')],
+    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
+    duration: { hours: 24},
     attendees: [
     { name: personOnDuty, email: 'weeksjasons@gmail.com', rsvp: true },
   ]
@@ -32,23 +47,10 @@ let trash = moment().recur({
 
 let trashArray = trash.all("L");
 
-
-let changeOwnership = moment().recur({
-    start: moment(),
-    end: moment().add(1 , 'y')
-}).every(7, "days");
-
-let people = ['jason', 'hess', 'adam', 'matt']
-let eventArray = [];
-// Outputs: ["01/01/2014", "01/03/2014", "01/05/2014", "01/07/2014"]
-let changeOwnerArray = changeOwnership.all("L");
-let count = 0
 for (var i = 0; i < trashArray.length; i++) {
   //go through every trash day
-// debugger
-
   if (changeOwnerArray.includes(trashArray[i])) {
-    count++
+    count += 1
     handleEventCreate(trashArray[i])
     // change ownership
   }else{
