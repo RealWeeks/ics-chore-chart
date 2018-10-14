@@ -1,0 +1,16 @@
+{
+  "name": "chorecal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jason Weeks",
+  "license": "ISC",
+  "dependencies": {
+    "ics": "^2.7.2",
+    "moment": "^2.22.2",
+    "moment-recur": "^1.0.7"
+  }
+}
