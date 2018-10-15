@@ -36,8 +36,8 @@ const handleEventCreate = (eventDate) =>{
 
 
   let trashEvent = {
-    title: 'Trash ' + personOnDuty,
-    description: 'Nightly thing I do',
+    title: 'Trash: ' + personOnDuty,
+    description: 'Takeout all trashes',
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
     attendees: [
@@ -48,8 +48,8 @@ const handleEventCreate = (eventDate) =>{
   let personTwo = remainingPeople[count -1] || people[people.length -1]
 
   let kitchenEvent = {
-    title: 'kitchen ' + personTwo,
-    description: 'Nightly thing I do',
+    title: 'Kitchen: ' + personTwo,
+    description: 'Clean kitchen',
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
     attendees: [
@@ -60,8 +60,8 @@ const handleEventCreate = (eventDate) =>{
   let personThree = remainingPeople[count -2] || people[people.length -2]
 
   let mailEvent = {
-    title: 'mail ' + personThree,
-    description: 'Nightly thing I do',
+    title: 'Mail: ' + personThree,
+    description: 'Get mail',
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
     attendees: [
@@ -72,8 +72,8 @@ const handleEventCreate = (eventDate) =>{
   let personFour = remainingPeople.filter(x => x !== personTwo).filter(x => x !== personThree)
 
   let generalEvent = {
-    title: 'general ' + personFour[0],
-    description: 'Nightly thing I do',
+    title: 'General: ' + personFour[0],
+    description: '',
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
     attendees: [
@@ -105,19 +105,6 @@ for (var i = 0; i < trashArray.length; i++) {
 
 }
 
-
-
-
-// let event = {
-//   title: 'Dinner',
-//   description: 'Nightly thing I do',
-//   start: [2018, 1, 15, 6, 30],
-//   duration: { minutes: 50 },
-//   attendees: [
-//   { name: 'Jason Weeks', email: 'weeksjasons@gmail.com', rsvp: true },
-// ]
-// }
-
 const callback = (err, value) =>{
   if (err) {
     console.log(err)
@@ -129,19 +116,3 @@ const callback = (err, value) =>{
 console.log(ics.createEvents(eventArray))
 
 ics.createEvents(eventArray,callback)
-
-
-
-// ics.createEvents({
-//   title: 'Dinner',
-//   description: 'Nightly thing I do',
-//   start: [2018, 1, 15, 6, 30],
-//   duration: { minutes: 50 }
-// }, (error, value) => {
-//   if (error) {
-//     console.log(error)
-//   }
-//
-//
-//   writeFileSync(`${__dirname}/event.ics`, value)
-// })
