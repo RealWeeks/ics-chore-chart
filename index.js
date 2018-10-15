@@ -22,16 +22,21 @@ const handleEventCreate = (eventDate) =>{
   let people = ['jason', 'hess', 'adam', 'matt']
   let personOnDuty = people[count] || people[0]
 
+  let remainingPeople = people.filter(x => x !== personOnDuty)
+
   if (count === 4) {
     let lastPerson = people.pop()
     people.unshift(lastPerson)
     count = 0
   }
 
+
+
   eventDateM = moment(eventDate)
 
-  let event = {
-    title: personOnDuty,
+
+  let trashEvent = {
+    title: 'Trash ' + personOnDuty,
     description: 'Nightly thing I do',
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
@@ -40,7 +45,29 @@ const handleEventCreate = (eventDate) =>{
     ]
   }
 
-  eventArray.push(event)
+  let personTwo = remainingPeople[count -1] || people[people.length -1]
+
+  let kitchenEvent = {
+    title: 'kitchen ' + personTwo,
+    description: 'Nightly thing I do',
+    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
+    duration: { hours: 24},
+    attendees: [
+      { name: personTwo, email: 'weeksjasons@gmail.com', rsvp: true },
+    ]
+  }
+
+  // let kitchenEvent = {
+  //   title: 'kitchen ' + remainingPeople.pop(),
+  //   description: 'Nightly thing I do',
+  //   start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
+  //   duration: { hours: 24},
+  //   attendees: [
+  //     { name: remainingPeople.pop(), email: 'weeksjasons@gmail.com', rsvp: true },
+  //   ]
+  // }
+
+  eventArray.push(trashEvent, kitchenEvent)
 
 }
 
