@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jason Weeks",
-  "license": "ISC",
+  "license": "GNU General Public License v3.0",
   "dependencies": {
     "ics": "^2.7.2",
     "moment": "^2.22.2",
