@@ -4,7 +4,7 @@ var moment = require('moment');
 require('moment-recur');
 
 
-let people = ['jason', 'hess', 'adam', 'matt']
+
 let eventArray = [];
 
 let changeOwnership = moment().recur({
@@ -19,8 +19,11 @@ let count = 0
 
 
 const handleEventCreate = (eventDate) =>{
+  let people = ['jason', 'hess', 'adam', 'matt']
   let personOnDuty = people[count]
-  if (count === 3) {
+  if (count === 4) {
+    let lastPerson = people.pop()
+    people.unshift(lastPerson)
     count = 0
   }
 
