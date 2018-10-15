@@ -20,7 +20,8 @@ let count = 0
 
 const handleEventCreate = (eventDate) =>{
   let people = ['jason', 'hess', 'adam', 'matt']
-  let personOnDuty = people[count]
+  let personOnDuty = people[count] || people[0]
+
   if (count === 4) {
     let lastPerson = people.pop()
     people.unshift(lastPerson)
@@ -35,8 +36,8 @@ const handleEventCreate = (eventDate) =>{
     start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
     duration: { hours: 24},
     attendees: [
-    { name: personOnDuty, email: 'weeksjasons@gmail.com', rsvp: true },
-  ]
+      { name: personOnDuty, email: 'weeksjasons@gmail.com', rsvp: true },
+    ]
   }
 
   eventArray.push(event)
