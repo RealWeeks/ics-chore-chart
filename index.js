@@ -57,17 +57,31 @@ const handleEventCreate = (eventDate) =>{
     ]
   }
 
-  // let kitchenEvent = {
-  //   title: 'kitchen ' + remainingPeople.pop(),
-  //   description: 'Nightly thing I do',
-  //   start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
-  //   duration: { hours: 24},
-  //   attendees: [
-  //     { name: remainingPeople.pop(), email: 'weeksjasons@gmail.com', rsvp: true },
-  //   ]
-  // }
+  let personThree = remainingPeople[count -2] || people[people.length -2]
 
-  eventArray.push(trashEvent, kitchenEvent)
+  let mailEvent = {
+    title: 'mail ' + personThree,
+    description: 'Nightly thing I do',
+    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
+    duration: { hours: 24},
+    attendees: [
+      { name: personThree, email: 'weeksjasons@gmail.com', rsvp: true },
+    ]
+  }
+
+  let personFour = remainingPeople.filter(x => x !== personTwo).filter(x => x !== personThree)
+
+  let generalEvent = {
+    title: 'general ' + personFour[0],
+    description: 'Nightly thing I do',
+    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
+    duration: { hours: 24},
+    attendees: [
+      { name: personFour[0], email: 'weeksjasons@gmail.com', rsvp: true },
+    ]
+  }
+
+  eventArray.push(trashEvent, kitchenEvent, mailEvent, generalEvent)
 
 }
 
