@@ -1,6 +1,6 @@
 # Chore Calendar ICS
 
-A crappy little node program to generate a .ics file for roommate chores.
+A crappy little node program to generate an .ics file for roommate chores.
 
 Hopefully I'll have time to make it dynamic, DRY and *pretty*
 
@@ -21,8 +21,6 @@ Install depencencies
 npm i
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ## Deployment
 
 Manually add .ics file to your desired calendar application.
@@ -35,7 +33,7 @@ Manually add .ics file to your desired calendar application.
 
 ## Contributing
 
-PR completely welcome.
+PRs completely welcome.
 
 
 ## Authors
@@ -45,7 +43,7 @@ PR completely welcome.
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE.md) file for details
 
 ## Acknowledgments
 
