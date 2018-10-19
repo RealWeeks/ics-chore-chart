@@ -1,4 +1,5 @@
-const { writeFileSync } = require('fs')
+// const { writeFileSync } = require('fs')
+const fs = require('fs');
 const ics = require('ics')
 const moment = require('moment');
 require('moment-recur');
@@ -36,61 +37,46 @@ const handleEventCreate = (eventDate) =>{
     count = 0
   }
 
-  eventDateM = moment(eventDate)
+  eventDateM = moment( new Date (eventDate)).format('"MM-DD-YYYY"')
 
   let trashEvent = {
     title: 'Trash: ' + personOnDuty.name,
-    description: 'Takeout all trashes',
-    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
-    duration: { hours: 24},
-    attendees: [
-      { name: personOnDuty.name, email: personOnDuty.email, rsvp: true },
-    ]
+    allDay : true,
+    // moment(new Date("27/04/2016")).format
+    start: eventDateM
   }
 
   let personTwo = remainingPeople[count -1] || people[people.length -1]
 
   let kitchenEvent = {
     title: 'Kitchen: ' + personTwo.name,
-    description: 'Clean kitchen',
-    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
-    duration: { hours: 24},
-    attendees: [
-      { name: personTwo.name, email: personTwo.email, rsvp: true },
-    ]
+    allDay : true,
+    start: eventDateM
   }
 
   let personThree = remainingPeople[count -2] || people[people.length -2]
 
   let mailEvent = {
     title: 'Mail: ' + personThree.name,
-    description: 'Get mail',
-    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
-    duration: { hours: 24},
-    attendees: [
-      { name: personThree.name, email: personThree.email, rsvp: true },
-    ]
+    allDay : true,
+    start: eventDateM
   }
 
   let personFour = remainingPeople.filter(x => x !== personTwo).filter(x => x !== personThree)
 
   let generalEvent = {
     title: 'General: ' + personFour[0].name,
-    description: '',
-    start: [eventDateM.format('YYYY'), eventDateM.format('MM'), eventDateM.format('D')],
-    duration: { hours: 24},
-    attendees: [
-      { name: personFour[0].name, email: personFour[0].email, rsvp: true },
-    ]
+    allDay : true,
+    start: eventDateM
   }
 
-  let dayToNum = eventDateM.day()
-  if (dayToNum === 1) {
-    [trashEvent, kitchenEvent, mailEvent, generalEvent]
-      .every(x => x.alarms = [{ action: 'display', trigger: { hours: 8, minutes: 30, before: false }}])
-  }else{
-    [trashEvent, kitchenEvent, mailEvent, generalEvent].every(x => delete x.alarms)
-  }
+  // let dayToNum = eventDateM.day()
+  // if (dayToNum === 1) {
+  //   [trashEvent, kitchenEvent, mailEvent, generalEvent]
+  //     .every(x => x.alarms = [{ action: 'display', trigger: { hours: 8, minutes: 30, before: false }}])
+  // }else{
+  //   [trashEvent, kitchenEvent, mailEvent, generalEvent].every(x => delete x.alarms)
+  // }
   eventArray.push(trashEvent, kitchenEvent, mailEvent, generalEvent)
 
 }
@@ -112,14 +98,26 @@ for (var i = 0; i < fewMonths.length; i++) {
 
 }
 
-const callback = (err, value) =>{
+const callback = (err, data) =>{
   if (err) {
     console.log(err)
   }else{
-    writeFileSync(`${__dirname}/event.ics`, value)
+    console.log(data)
   }
 }
 
-console.log(ics.createEvents(eventArray))
+let json = JSON.stringify(eventArray);
 
-ics.createEvents(eventArray,callback)
+// console.log(eventArray)
+
+// fs.writeFile('chore-calendar.json', json, 'utf8', callback)
+
+fs.writeFile ("chore-calendar.json", json, function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
+// fs.writeFile();
+// console.log(json);
+
+// ics.createEvents(eventArray,callback)
